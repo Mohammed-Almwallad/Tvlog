@@ -1,0 +1,130 @@
+
+
+
+<br><br>
+<div class="container border-bottom border-dark d-flex justify-content-center">
+    <p class="align-self-center" style="font-size: 2rem;"><strong>home page</strong></p>
+</div>
+
+
+
+<br>
+    <div class="container">
+ 
+        <% if(typeof msg !="undefined") {%>
+            <% if(msg.length == 1){ %> 
+               <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <%= msg %>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+               <% } %>
+               <% } %>
+
+               <% if(typeof msgl !="undefined") {%>
+                <% if(msgl.length == 1){ %> 
+                   <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= msgl %>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                     </div>
+                   <% } %>
+                   <% } %>
+        
+      <FORM class=" d-inline-flex" NAME="myform" ACTION="" METHOD="GET">
+          <div class="form-group">
+              <select class="custom-control custom-select custom-control-inline" NAME="list">
+                  <option selected>All
+                  <OPTION>Action
+                  <OPTION>Adventure
+                  <OPTION>Animation
+                  <OPTION>Comedy
+                  <OPTION>Crime
+                  <OPTION>Documentary
+                  <OPTION>Drama
+                  <OPTION>Family
+                  <OPTION>Fantasy
+                  <OPTION>History
+                  <OPTION>Horror
+                  <OPTION>Music
+                  <OPTION>Mystery
+                  <OPTION>Romance
+                  <OPTION>Science Finction
+                  <OPTION>Tv Movie
+                  <OPTION>Thriller
+                  <OPTION>War
+                  <OPTION>Western
+              </select>
+          </div>
+          
+          <div class="form-group">
+              <INPUT class="btn btn-primary btn-sm d-inline-flex" TYPE="button" NAME="button" Value="submit"
+                  onClick="SelectGenre(this.form)">
+          </div>
+      </FORM>
+  </div>
+
+
+  <div class="container border">
+        <div id="carddeck" class="card-deck text-center">            
+        </div>
+  </div> 
+
+
+<script src="../public/index.js"></script>
+
+<%- contentFor('head') %>
+<% if (checkuser) { %>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            watched before
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Watched_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Watched_Tvshows">Tv shows</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            want to watch
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Towatch_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Towatch_Tvshows">Tv shows</a> 
+        </div>
+    </li>
+    <li class="dropdown nav-item">
+        <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown"
+            aria-expanded="false">
+            <i class="material-icons">perm_identity</i>
+            <div class="ripple-container"></div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/user/logout">logout</a> 
+        </div>
+    </li>
+</ul>
+
+
+<% }else { %>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="dropdown nav-item">
+        <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown"
+            aria-expanded="false">
+            <i class="material-icons">perm_identity</i>
+            <div class="ripple-container"></div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/user/signup">sign up</a>
+          <a class="dropdown-item" href="/user/login">login</a>
+        </div>
+    </li>
+</ul>
+<% } %>

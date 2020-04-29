@@ -1,0 +1,170 @@
+<style>
+
+  img {
+
+    width: 75%;
+    height: 90%;
+    margin: 10px;
+  }
+
+
+  #poster {
+    height: 380px;
+
+  }
+
+  #title {
+    margin-left: 10rem;
+    margin-top: 25px;
+    font-size: 2rem;
+
+  }
+</style>
+
+
+<br><br>
+<div class="container border-bottom border-dark d-flex justify-content-center">
+
+  <p class="align-self-center" style="font-size: 2rem;"><strong>Movie information</strong></p>
+</div>
+
+
+
+<br><br><br>
+<div class="container border border-dark">
+  <div class="row">
+    <div id="poster" class="col-4">
+      <img src=<%= imgurl %> alt="wee">
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col">
+          <p id="title"> <strong><%= data.title %> </strong></p>
+        </div>
+      </div>
+      <div style="height: 40px; margin-top: 40px;" class="row">
+        <div class="col-6">
+          <p> <strong> popularity: </strong> <%= data.popularity %> </p>
+        </div>
+        <div class="col-6">
+          <p> <strong> release Date: </strong> <%= data.release_date %> </p>
+        </div>
+      </div>
+      <div style="height: 30px;" class="row">
+        <div class="col">
+
+          <p><strong>genre: </strong>
+
+            <% genres.forEach(genre => { %>
+            <%= genre.name %>
+            <% }); %>
+          </p>
+
+        </div>
+      </div>
+      <div style="height: 150px;" class="row">
+        <div class="col">
+          <p> <strong> overview: </strong> <%= data.overview %> </p>
+        </div>
+      </div>
+      <div style="height: 50px;" class="row justify-content-end">
+        <div style="padding-left: 110px;" class="col-4 ">
+          <button onclick="redirct()" type="button" class="btn btn-primary">watch later</button>
+
+        </div>
+        <div class="col-4">
+          <button onclick="redirct2()" type="button" class="btn btn-primary">
+            watched already
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+
+
+    function redirct() {
+
+      let num = window.location.href;
+
+      num = num.slice(40);
+
+      num = "http://localhost:3000/user/addto_towatch_movies/" + num;
+
+      window.location.replace(num);
+    }
+
+
+    function redirct2() {
+
+      let num = window.location.href;
+
+      num = num.slice(40);
+
+      num = "http://localhost:3000/user/addto_Watched_Movies/" + num;
+
+      window.location.replace(num);
+    }
+
+  </script>
+
+<%- contentFor('head') %>
+<% if (checkuser) { %>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            watched before
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Watched_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Watched_Tvshows">Tv shows</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            want to watch
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Towatch_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Towatch_Tvshows">Tv shows</a> 
+        </div>
+    </li>
+    <li class="dropdown nav-item">
+        <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown"
+            aria-expanded="false">
+            <i class="material-icons">perm_identity</i>
+            <div class="ripple-container"></div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/user/logout">logout</a> 
+        </div>
+    </li>
+</ul>
+
+
+<% }else { %>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="dropdown nav-item">
+        <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown"
+            aria-expanded="false">
+            <i class="material-icons">perm_identity</i>
+            <div class="ripple-container"></div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/user/signup">sign up</a>
+          <a class="dropdown-item" href="/user/login">login</a>
+        </div>
+    </li>
+</ul>
+<% } %>

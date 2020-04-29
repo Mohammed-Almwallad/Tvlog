@@ -1,0 +1,76 @@
+
+<br>
+
+<div class="container">
+  
+  <% if(typeof msg !="undefined") {%>
+   <% if(msg.length == 1){ %> 
+      <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+           <%= msg %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% } %>
+      <% } %>
+
+      <% if(typeof msgl !="undefined") {%>
+        <% if(msgl.length == 1){ %> 
+           <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= msgl %>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+           <% } %>
+           <% } %>
+
+  <div class="row">
+      <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="card card-login h-90">
+          <form method="POST" action="/user/login">
+            <div class="card-header card-header-primary text-center">
+              <h4 class="card-title">Login</h4>
+            </div>
+            <div class="card-body">
+              <span class="bmd-form-group"><div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">mail</i>
+                  </span>
+                </div>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email...">
+              </div></span>
+              <span class="bmd-form-group"><div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                </div>
+                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password...">
+              </div></span>
+            </div>
+            <div class="footer text-center">
+              <!-- <a href="/user/login" class="btn btn-primary btn-link btn-wd btn-lg">log in</a> -->
+              <button type="submit" class="btn btn-primary">log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%- contentFor('head') %>
+    <ul class="navbar-nav ml-auto">
+      <li class="dropdown nav-item">
+          <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown"
+              aria-expanded="false">
+              <i class="material-icons">perm_identity</i>
+              <div class="ripple-container"></div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/user/signup">sign up</a>
+          </div>
+      </li>
+  </ul>

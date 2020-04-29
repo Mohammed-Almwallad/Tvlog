@@ -1,0 +1,168 @@
+<style>
+    .card-body {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 300px;
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 20px;
+
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+        padding: 4px 16px;
+        /* font-size: 180%; */
+
+    }
+
+    .movie {
+        width: 100%;
+    }
+
+    #genre {
+        display: inline;
+        margin: 0px, 0px, 0px, 0px;
+
+    }
+
+    #title {
+        font-size: 100%;
+        padding: 4px 16px;
+
+    }
+
+    #maindiv {
+        text-align: center;
+    }
+</style>
+
+
+<br><br>
+<div class="container border-bottom border-dark d-flex justify-content-center">
+    <p class="align-self-center" style="font-size: 2rem;"><strong>want to watch movies list</strong></p>
+
+</div>
+
+ 
+
+ 
+
+<% if(typeof movies !="undefined") {%>
+<% if (movies.length === 0) { %>
+<br>
+<div class="container d-flex justify-content-center">
+    <p class="align-self-center" style="font-size: 2rem;"><strong>no movies in the list to display :(</strong></p>
+</div>
+<% } %>
+<% } %>
+
+
+<br>
+<div id="maindiv" class="container">
+
+     <% if(msg.length == 1){ %> 
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <%= msg %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% } %> 
+
+
+    <div id="carddeck" class="card-deck">
+        <% if(typeof movies !="undefined") {%>
+        <% movies.forEach(movie => { %>
+        <div class="card-body border border-dark rounded m-3 h-100" style="width: 295px;height: 305px;">
+            <img class="movie" style="width: 205px;height: 255px;" src=`<%= movie.poster_path %> ` alt="movie poster">
+            <div class="container">
+                <h4 id="title"> <%= movie.title %> </h4>
+            </div>
+            <button onclick='redirct(`<%= movie.id %>`)' type="button" class="btn btn-primary">watched</button>
+            <button onclick="redirct2(`<%= movie.id %>`)" type="button" class="btn btn-primary">remove</button>
+        </div>
+        <% }) %>
+        <% } %>
+
+    </div>
+</div>
+
+
+
+<script>
+
+
+    function redirct(id) {
+
+        let num = id;
+
+        num = "http://localhost:3000/user/moveMovies/" + num;
+
+        window.location.replace(num);
+
+    }
+
+
+    function redirct2(id) {
+
+        let num = id;
+
+        num = "http://localhost:3000/user/removeTowatchMovie/" + num;
+
+        window.location.replace(num);
+
+    }
+
+</script>
+
+<script>
+    let poster = document.getElementsByClassName("movie");
+    poster = Array.from(poster);
+    poster.forEach(e => {
+
+        let l = e.src;
+        l = l.slice(30);
+        e.setAttribute("src", l);
+
+    });
+
+
+</script>
+
+
+<%- contentFor('head') %>
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            watched before
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Watched_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Watched_Tvshows">Tv shows</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            want to watch
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/user/Towatch_Movies">Movies</a>
+            <a class="dropdown-item" href="/user/Towatch_Tvshows">Tv shows</a>
+        </div>
+    </li>
+    <li class="dropdown nav-item">
+        <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons">perm_identity</i>
+            <div class="ripple-container"></div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/user/logout">logout</a>
+        </div>
+    </li>
+</ul>
